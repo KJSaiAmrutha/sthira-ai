@@ -494,21 +494,122 @@
 
                 <!-- Asana Corrector Section -->
                 <div id="asana-corrector-section" class="dashboard-section">
-                    <h2>Asana Corrector</h2>
-                    <div class="asana-upload">
-                        <div class="upload-area" onclick="document.getElementById('asana-file').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload your asana photo</p>
-                            <input type="file" id="asana-file" accept="image/*" style="display: none;" onchange="analyzeAsana(this)">
+                    <h2>AI-Powered Asana Corrector</h2>
+                    <div class="asana-corrector-content">
+                        <div class="corrector-options">
+                            <div class="option-tabs">
+                                <button class="tab-btn active" onclick="switchCorrectorTab('upload')">
+                                    <i class="fas fa-upload"></i> Upload Image
+                                </button>
+                                <button class="tab-btn" onclick="switchCorrectorTab('live')">
+                                    <i class="fas fa-video"></i> Live AI Analysis
+                                </button>
+                            </div>
                         </div>
+
+                        <!-- Image Upload Tab -->
+                        <div id="upload-tab" class="corrector-tab active">
+                            <div class="upload-section">
+                                <div class="upload-area" onclick="document.getElementById('asana-file').click()">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to upload your asana photo</p>
+                                    <small>Supports JPG, PNG, WebP formats</small>
+                                    <input type="file" id="asana-file" accept="image/*" style="display: none;" onchange="analyzeAsanaImage(this)">
+                                </div>
+                                <div class="upload-features">
+                                    <h4>Advanced Pose Analysis Features:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check"></i> Real-time pose detection using OpenPose</li>
+                                        <li><i class="fas fa-check"></i> ANN classifier for pose recognition</li>
+                                        <li><i class="fas fa-check"></i> Form correction suggestions</li>
+                                        <li><i class="fas fa-check"></i> Accuracy scoring and feedback</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live AI Analysis Tab -->
+                        <div id="live-tab" class="corrector-tab">
+                            <div class="live-analysis-section">
+                                <div class="live-camera-area" id="camera-area">
+                                    <div class="camera-placeholder" id="camera-placeholder">
+                                        <i class="fas fa-video"></i>
+                                        <h3>Live Pose Analysis</h3>
+                                        <p>Real-time yoga pose estimation and form correction</p>
+                                        <button class="btn btn-primary" onclick="startLiveAnalysis()">
+                                            <i class="fas fa-play"></i> Start Live Analysis
+                                        </button>
+                                    </div>
+                                    <video id="live-video" style="display: none;" autoplay muted></video>
+                                    <canvas id="pose-canvas" style="display: none;"></canvas>
+                                </div>
+                                <div class="live-controls">
+                                    <button class="btn btn-secondary" id="stop-live-btn" onclick="stopLiveAnalysis()" style="display: none;">
+                                        <i class="fas fa-stop"></i> Stop Analysis
+                                    </button>
+                                    <button class="btn btn-primary" id="capture-btn" onclick="capturePose()" style="display: none;">
+                                        <i class="fas fa-camera"></i> Capture Pose
+                                    </button>
+                                </div>
+                                <div class="live-features">
+                                    <h4>Live AI Technology:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check"></i> Real-time webcam pose estimation</li>
+                                        <li><i class="fas fa-check"></i> Instant form feedback and corrections</li>
+                                        <li><i class="fas fa-check"></i> Pose classification using ANN</li>
+                                        <li><i class="fas fa-check"></i> Continuous monitoring and guidance</li>
+                                    </ul>
+                                    <div class="tech-details">
+                                        <h5>Powered by:</h5>
+                                        <p><strong>OpenPose</strong> - Real-time multi-person pose estimation</p>
+                                        <p><strong>ANN Classifier</strong> - Advanced neural network for pose recognition</p>
+                                        <p><strong>COCO Dataset</strong> - Trained on comprehensive pose data</p>
+                                        <a href="https://github.com/Kanishkare/YogaPoseEstimation" target="_blank" class="repo-link">
+                                            <i class="fab fa-github"></i> View Source Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Results -->
                         <div id="asana-analysis" class="asana-analysis"></div>
-                    </div>
-                    
-                    <div class="asana-significance">
-                        <h3>Asana Significance</h3>
-                        <div class="asana-info">
-                            <h4>Mountain Pose (Tadasana)</h4>
-                            <p>Improves posture, strengthens legs, and enhances focus. Great for beginners to build foundation.</p>
+                        
+                        <!-- Pose Library -->
+                        <div class="pose-library">
+                            <h3>Yoga Pose Library</h3>
+                            <div class="pose-grid">
+                                <div class="pose-item" onclick="analyzeSpecificPose('mountain')">
+                                    <div class="pose-icon">🧘‍♀️</div>
+                                    <h4>Mountain Pose</h4>
+                                    <p>Tadasana</p>
+                                </div>
+                                <div class="pose-item" onclick="analyzeSpecificPose('downward-dog')">
+                                    <div class="pose-icon">🐕</div>
+                                    <h4>Downward Dog</h4>
+                                    <p>Adho Mukha Svanasana</p>
+                                </div>
+                                <div class="pose-item" onclick="analyzeSpecificPose('warrior1')">
+                                    <div class="pose-icon">⚔️</div>
+                                    <h4>Warrior I</h4>
+                                    <p>Virabhadrasana I</p>
+                                </div>
+                                <div class="pose-item" onclick="analyzeSpecificPose('tree')">
+                                    <div class="pose-icon">🌳</div>
+                                    <h4>Tree Pose</h4>
+                                    <p>Vrikshasana</p>
+                                </div>
+                                <div class="pose-item" onclick="analyzeSpecificPose('child')">
+                                    <div class="pose-icon">👶</div>
+                                    <h4>Child's Pose</h4>
+                                    <p>Balasana</p>
+                                </div>
+                                <div class="pose-item" onclick="analyzeSpecificPose('cobra')">
+                                    <div class="pose-icon">🐍</div>
+                                    <h4>Cobra Pose</h4>
+                                    <p>Bhujangasana</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

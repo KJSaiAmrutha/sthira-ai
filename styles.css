@@ -1728,6 +1728,259 @@ body {
 }
 
 /* Enhanced Asana Corrector Styles */
+.asana-corrector-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.corrector-options {
+    margin-bottom: 30px;
+}
+
+.option-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.option-tabs .tab-btn {
+    padding: 15px 25px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.option-tabs .tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.option-tabs .tab-btn:hover {
+    color: #667eea;
+}
+
+.corrector-tab {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.corrector-tab.active {
+    display: block;
+}
+
+.upload-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.upload-features h4 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.upload-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.upload-features li {
+    padding: 8px 0;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.upload-features i {
+    color: #28a745;
+    margin-right: 10px;
+}
+
+/* Live Analysis Styles */
+.live-analysis-section {
+    margin-bottom: 30px;
+}
+
+.live-camera-area {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px dashed #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.live-camera-area.active {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.camera-placeholder {
+    padding: 40px;
+}
+
+.camera-placeholder i {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.camera-placeholder h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.camera-placeholder p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#live-video {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+#pose-canvas {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    border: 2px solid #667eea;
+}
+
+.live-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.live-features {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.live-features h4 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.live-features ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.live-features li {
+    padding: 8px 0;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.live-features i {
+    color: #28a745;
+    margin-right: 10px;
+}
+
+.tech-details {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.tech-details h5 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.tech-details p {
+    color: #666;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.repo-link:hover {
+    color: #5a67d8;
+}
+
+/* Pose Library Styles */
+.pose-library {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #e9ecef;
+}
+
+.pose-library h3 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.pose-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pose-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-color: #667eea;
+}
+
+.pose-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.pose-item h4 {
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.pose-item p {
+    color: #666;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Analysis Results */
 .asana-analysis.active {
     display: block;
 }
@@ -1796,6 +2049,101 @@ body {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #e9ecef;
+}
+
+/* Loading Steps Styles */
+.analysis-loading {
+    text-align: center;
+    padding: 20px;
+}
+
+.loading-steps {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.step i {
+    color: #28a745;
+}
+
+.step i.fa-spinner {
+    color: #667eea;
+}
+
+.step i.fa-clock {
+    color: #ffc107;
+}
+
+/* Detection Method Styles */
+.detection-method {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+/* Live Pose Info Styles */
+.live-pose-info {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.live-pose-info h5 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.live-pose-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Analysis Metrics Styles */
+.analysis-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+}
+
+.metric-label {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.metric-value {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
 }
 
 /* Kids Yoga Modal Styles */
