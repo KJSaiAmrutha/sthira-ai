@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sthira AI - Yoga Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><i class="fas fa-lotus"></i> Sthira AI</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>Welcome to Sthira AI</h1>
+                <p>Your personal yoga companion with AI-powered guidance, live sessions, and personalized wellness plans.</p>
+                <div class="auth-buttons">
+                    <button class="btn btn-primary" onclick="showAuthModal('user')">
+                        <i class="fas fa-user"></i> Join as User
+                    </button>
+                    <button class="btn btn-secondary" onclick="showAuthModal('trainer')">
+                        <i class="fas fa-chalkboard-teacher"></i> Join as Trainer
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="yoga-illustration">
+                    <i class="fas fa-lotus-position"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section" id="features">
+            <h2>Platform Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Live Yoga Sessions</h3>
+                    <p>Join live yoga classes with certified trainers</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI Health Recommendations</h3>
+                    <p>Get personalized health advice based on your concerns</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Asana Corrector</h3>
+                    <p>Upload your poses and get instant feedback</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your daily streaks and improvements</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>AI Diet Plans</h3>
+                    <p>Customized nutrition plans for your wellness journey</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-child"></i>
+                    <h3>Kids Yoga</h3>
+                    <p>Specialized yoga programs for children</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="tab-btn active" onclick="switchAuthTab('login')">Login</button>
+                    <button class="tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+                </div>
+                
+                <div id="login-form" class="auth-form active">
+                    <h2 id="login-title">Login as User</h2>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+
+                <div id="signup-form" class="auth-form">
+                    <h2 id="signup-title">Sign Up as User</h2>
+                    <form onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label for="signup-name">Full Name</label>
+                            <input type="text" id="signup-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">Email</label>
+                            <input type="email" id="signup-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-confirm-password">Confirm Password</label>
+                            <input type="password" id="signup-confirm-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Onboarding Modal -->
+    <div id="onboarding-modal" class="modal">
+        <div class="modal-content onboarding-content">
+            <div class="onboarding-header">
+                <h2><i class="fas fa-user-plus"></i> Complete Your Profile</h2>
+                <p>Help us personalize your yoga journey by sharing some information about yourself</p>
+            </div>
+            
+            <form id="onboarding-form" onsubmit="completeOnboarding(event)">
+                <div class="onboarding-step active" id="step-1">
+                    <h3>Physical Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-age">Age</label>
+                            <input type="number" id="user-age" min="13" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-gender">Gender</label>
+                            <select id="user-gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-weight">Weight (kg)</label>
+                            <input type="number" id="user-weight" min="30" max="300" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-height">Height (cm)</label>
+                            <input type="number" id="user-height" min="100" max="250" required>
+                        </div>
+                    </div>
+                    <div class="bmi-display">
+                        <div class="bmi-result">
+                            <span class="bmi-label">Your BMI:</span>
+                            <span class="bmi-value" id="bmi-value">--</span>
+                            <span class="bmi-category" id="bmi-category"></span>
+                        </div>
+                        <div class="bmi-chart">
+                            <div class="bmi-bar">
+                                <div class="bmi-fill" id="bmi-fill"></div>
+                            </div>
+                            <div class="bmi-labels">
+                                <span>Underweight</span>
+                                <span>Normal</span>
+                                <span>Overweight</span>
+                                <span>Obese</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="onboarding-step" id="step-2">
+                    <h3>Fitness Goals & Experience</h3>
+                    <div class="form-group">
+                        <label for="fitness-goals">What are your fitness goals?</label>
+                        <select id="fitness-goals" required>
+                            <option value="">Select your primary goal</option>
+                            <option value="weight-loss">Weight Loss</option>
+                            <option value="muscle-gain">Muscle Gain</option>
+                            <option value="flexibility">Improve Flexibility</option>
+                            <option value="strength">Build Strength</option>
+                            <option value="endurance">Increase Endurance</option>
+                            <option value="balance">Better Balance</option>
+                            <option value="stress-relief">Stress Relief</option>
+                            <option value="general-fitness">General Fitness</option>
+                            <option value="rehabilitation">Rehabilitation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="yoga-experience">What's your current yoga experience level?</label>
+                        <select id="yoga-experience" required>
+                            <option value="">Select experience level</option>
+                            <option value="complete-beginner">Complete Beginner (Never done yoga)</option>
+                            <option value="beginner">Beginner (Less than 6 months)</option>
+                            <option value="intermediate">Intermediate (6 months - 2 years)</option>
+                            <option value="advanced">Advanced (2+ years)</option>
+                            <option value="instructor">Yoga Instructor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="primary-yoga-goal">What's your primary goal to practice yoga?</label>
+                        <select id="primary-yoga-goal" required>
+                            <option value="">Select primary goal</option>
+                            <option value="physical-health">Physical Health & Fitness</option>
+                            <option value="mental-wellness">Mental Wellness & Stress Relief</option>
+                            <option value="spiritual-growth">Spiritual Growth & Mindfulness</option>
+                            <option value="injury-prevention">Injury Prevention & Recovery</option>
+                            <option value="flexibility-mobility">Flexibility & Mobility</option>
+                            <option value="strength-building">Strength Building</option>
+                            <option value="weight-management">Weight Management</option>
+                            <option value="better-sleep">Better Sleep Quality</option>
+                            <option value="social-connection">Social Connection</option>
+                            <option value="personal-challenge">Personal Challenge & Growth</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="onboarding-step" id="step-3">
+                    <h3>Practice Frequency & Preferences</h3>
+                    <div class="form-group">
+                        <label for="current-frequency">What's your current yoga practice frequency?</label>
+                        <select id="current-frequency" required>
+                            <option value="">Select current frequency</option>
+                            <option value="never">Never (New to yoga)</option>
+                            <option value="rarely">Rarely (Less than once a month)</option>
+                            <option value="monthly">Monthly (1-3 times per month)</option>
+                            <option value="weekly">Weekly (1-2 times per week)</option>
+                            <option value="regular">Regular (3-4 times per week)</option>
+                            <option value="daily">Daily (5+ times per week)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="primary-reason">What's the primary reason you want to do yoga?</label>
+                        <select id="primary-reason" required>
+                            <option value="">Select primary reason</option>
+                            <option value="stress-management">Stress Management</option>
+                            <option value="physical-fitness">Physical Fitness</option>
+                            <option value="mental-clarity">Mental Clarity & Focus</option>
+                            <option value="pain-relief">Pain Relief</option>
+                            <option value="weight-loss">Weight Loss</option>
+                            <option value="flexibility">Flexibility Improvement</option>
+                            <option value="strength">Strength Building</option>
+                            <option value="balance">Balance & Coordination</option>
+                            <option value="sleep-improvement">Better Sleep</option>
+                            <option value="mindfulness">Mindfulness & Meditation</option>
+                            <option value="injury-prevention">Injury Prevention</option>
+                            <option value="rehabilitation">Rehabilitation</option>
+                            <option value="social-activity">Social Activity</option>
+                            <option value="personal-growth">Personal Growth</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="desired-frequency">How often would you like to do yoga?</label>
+                        <select id="desired-frequency" required>
+                            <option value="">Select desired frequency</option>
+                            <option value="2-3-times-week">2-3 times per week</option>
+                            <option value="daily">Daily practice</option>
+                            <option value="weekends-only">Weekends only</option>
+                            <option value="when-needed">When I need it (stress, pain, etc.)</option>
+                            <option value="intensive-periods">Intensive periods (retreats, challenges)</option>
+                            <option value="flexible-schedule">Flexible schedule</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferred-session-length">Preferred session length?</label>
+                        <select id="preferred-session-length" required>
+                            <option value="">Select session length</option>
+                            <option value="10-15-minutes">10-15 minutes (Quick sessions)</option>
+                            <option value="20-30-minutes">20-30 minutes (Standard)</option>
+                            <option value="45-60-minutes">45-60 minutes (Extended)</option>
+                            <option value="90-minutes-plus">90+ minutes (Intensive)</option>
+                            <option value="flexible">Flexible (Any length)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="onboarding-navigation">
+                    <button type="button" class="btn btn-secondary" id="prev-btn" onclick="previousStep()" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button type="button" class="btn btn-primary" id="next-btn" onclick="nextStep()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="complete-btn" style="display: none;">
+                        <i class="fas fa-check"></i> Complete Profile
+                    </button>
+                </div>
+
+                <div class="onboarding-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">Step 1 of 3</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="user-dashboard" class="page">
+        <nav class="dashboard-nav">
+            <div class="nav-brand">
+                <h2><i class="fas fa-lotus"></i> Sthira AI</h2>
+            </div>
+            <div class="nav-user">
+                <span id="user-name">Welcome, User!</span>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="dashboard-sidebar">
+                <ul class="sidebar-menu">
+                    <li class="active" onclick="showDashboardSection('overview')">
+                        <i class="fas fa-home"></i> Overview
+                    </li>
+                    <li onclick="showDashboardSection('live-sessions')">
+                        <i class="fas fa-video"></i> Live Sessions
+                    </li>
+                    <li onclick="showDashboardSection('yoga-kits')">
+                        <i class="fas fa-dumbbell"></i> Yoga Kits
+                    </li>
+                    <li onclick="showDashboardSection('progress')">
+                        <i class="fas fa-chart-line"></i> Progress
+                    </li>
+                    <li onclick="showDashboardSection('health-ai')">
+                        <i class="fas fa-brain"></i> AI Health
+                    </li>
+                    <li onclick="showDashboardSection('asana-corrector')">
+                        <i class="fas fa-camera"></i> Asana Corrector
+                    </li>
+                    <li onclick="showDashboardSection('workshops')">
+                        <i class="fas fa-map-marker-alt"></i> Nearby Workshops
+                    </li>
+                    <li onclick="showDashboardSection('trainers')">
+                        <i class="fas fa-users"></i> Connect Trainers
+                    </li>
+                    <li onclick="showDashboardSection('diet-plan')">
+                        <i class="fas fa-utensils"></i> Diet Plan
+                    </li>
+                    <li onclick="showDashboardSection('kids-yoga')">
+                        <i class="fas fa-child"></i> Kids Yoga
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dashboard-main">
+                <!-- Overview Section -->
+                <div id="overview-section" class="dashboard-section active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-fire"></i>
+                            <h3 id="streak-count">7</h3>
+                            <p>Day Streak</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-trophy"></i>
+                            <h3 id="rank-position">#15</h3>
+                            <p>Leaderboard Rank</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <h3 id="session-time">45</h3>
+                            <p>Minutes Today</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-star"></i>
+                            <h3 id="accuracy-score">92%</h3>
+                            <p>Average Accuracy</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="showDashboardSection('live-sessions')">
+                                <i class="fas fa-play"></i> Start Live Session
+                            </button>
+                            <button class="btn btn-secondary" onclick="showDashboardSection('asana-corrector')">
+                                <i class="fas fa-camera"></i> Check Pose
+                            </button>
+                            <button class="btn btn-secondary" onclick="showDashboardSection('health-ai')">
+                                <i class="fas fa-brain"></i> Get Health Advice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Sessions Section -->
+                <div id="live-sessions-section" class="dashboard-section">
+                    <h2>Live Yoga Sessions</h2>
+                    <div class="sessions-grid">
+                        <div class="session-card">
+                            <div class="session-header">
+                                <h3>Morning Flow</h3>
+                                <span class="live-badge">LIVE</span>
+                            </div>
+                            <p>Start your day with energizing yoga flow</p>
+                            <div class="session-info">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-users"></i> 45 participants</span>
+                            </div>
+                            <button class="btn btn-primary">Join Session</button>
+                        </div>
+                        <div class="session-card">
+                            <div class="session-header">
+                                <h3>Evening Relaxation</h3>
+                                <span class="upcoming-badge">Upcoming</span>
+                            </div>
+                            <p>Wind down with calming evening practice</p>
+                            <div class="session-info">
+                                <span><i class="fas fa-clock"></i> 45 min</span>
+                                <span><i class="fas fa-users"></i> 23 participants</span>
+                            </div>
+                            <button class="btn btn-secondary">Join Session</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progress-section" class="dashboard-section">
+                    <h2>Your Progress</h2>
+                    <div class="progress-content">
+                        <div class="streak-section">
+                            <h3>Daily Streak</h3>
+                            <div class="streak-calendar">
+                                <div class="streak-day completed">1</div>
+                                <div class="streak-day completed">2</div>
+                                <div class="streak-day completed">3</div>
+                                <div class="streak-day completed">4</div>
+                                <div class="streak-day completed">5</div>
+                                <div class="streak-day completed">6</div>
+                                <div class="streak-day completed">7</div>
+                                <div class="streak-day">8</div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-section">
+                            <h3>Leaderboard</h3>
+                            <div class="leaderboard-list">
+                                <div class="leaderboard-item">
+                                    <span class="rank">1</span>
+                                    <span class="name">Sarah Johnson</span>
+                                    <span class="score">28 days</span>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <span class="rank">2</span>
+                                    <span class="name">Mike Chen</span>
+                                    <span class="score">25 days</span>
+                                </div>
+                                <div class="leaderboard-item current-user">
+                                    <span class="rank">15</span>
+                                    <span class="name">You</span>
+                                    <span class="score">7 days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Health Section -->
+                <div id="health-ai-section" class="dashboard-section">
+                    <h2>AI Health Recommendations</h2>
+                    <div class="health-dialog">
+                        <div class="dialog-box">
+                            <h3>Describe Your Health Concern</h3>
+                            <textarea id="health-concern" placeholder="Tell me about your health concern or what you'd like to improve..."></textarea>
+                            <button class="btn btn-primary" onclick="getHealthRecommendation()">
+                                <i class="fas fa-brain"></i> Get AI Recommendation
+                            </button>
+                        </div>
+                        <div id="health-response" class="health-response"></div>
+                    </div>
+                </div>
+
+                <!-- Asana Corrector Section -->
+                <div id="asana-corrector-section" class="dashboard-section">
+                    <h2>Asana Corrector</h2>
+                    <div class="asana-upload">
+                        <div class="upload-area" onclick="document.getElementById('asana-file').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload your asana photo</p>
+                            <input type="file" id="asana-file" accept="image/*" style="display: none;" onchange="analyzeAsana(this)">
+                        </div>
+                        <div id="asana-analysis" class="asana-analysis"></div>
+                    </div>
+                    
+                    <div class="asana-significance">
+                        <h3>Asana Significance</h3>
+                        <div class="asana-info">
+                            <h4>Mountain Pose (Tadasana)</h4>
+                            <p>Improves posture, strengthens legs, and enhances focus. Great for beginners to build foundation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yoga Kits Section -->
+                <div id="yoga-kits-section" class="dashboard-section">
+                    <h2>Yoga Kits & Equipment</h2>
+                    <div class="kits-grid">
+                        <div class="kit-card">
+                            <div class="kit-image">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h3>Beginner Kit</h3>
+                            <p>Perfect for starting your yoga journey</p>
+                            <ul class="kit-items">
+                                <li><i class="fas fa-check"></i> Yoga Mat</li>
+                                <li><i class="fas fa-check"></i> Blocks (2)</li>
+                                <li><i class="fas fa-check"></i> Strap</li>
+                                <li><i class="fas fa-check"></i> Bolster</li>
+                            </ul>
+                            <div class="kit-price">$89.99</div>
+                            <button class="btn btn-primary">Add to Cart</button>
+                        </div>
+                        <div class="kit-card">
+                            <div class="kit-image">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3>Advanced Kit</h3>
+                            <p>For experienced practitioners</p>
+                            <ul class="kit-items">
+                                <li><i class="fas fa-check"></i> Premium Yoga Mat</li>
+                                <li><i class="fas fa-check"></i> Blocks (4)</li>
+                                <li><i class="fas fa-check"></i> Straps (2)</li>
+                                <li><i class="fas fa-check"></i> Bolster</li>
+                                <li><i class="fas fa-check"></i> Blanket</li>
+                            </ul>
+                            <div class="kit-price">$149.99</div>
+                            <button class="btn btn-primary">Add to Cart</button>
+                        </div>
+                        <div class="kit-card">
+                            <div class="kit-image">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <h3>Kids Kit</h3>
+                            <p>Fun yoga equipment for children</p>
+                            <ul class="kit-items">
+                                <li><i class="fas fa-check"></i> Colorful Yoga Mat</li>
+                                <li><i class="fas fa-check"></i> Soft Blocks</li>
+                                <li><i class="fas fa-check"></i> Fun Straps</li>
+                                <li><i class="fas fa-check"></i> Yoga Cards</li>
+                            </ul>
+                            <div class="kit-price">$59.99</div>
+                            <button class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nearby Workshops Section -->
+                <div id="workshops-section" class="dashboard-section">
+                    <h2>Nearby Workshops</h2>
+                    <div class="workshops-content">
+                        <div class="workshop-filters">
+                            <button class="filter-btn active" onclick="filterWorkshops('all')">All</button>
+                            <button class="filter-btn" onclick="filterWorkshops('today')">Today</button>
+                            <button class="filter-btn" onclick="filterWorkshops('weekend')">This Weekend</button>
+                            <button class="filter-btn" onclick="filterWorkshops('free')">Free</button>
+                        </div>
+                        <div class="workshops-grid">
+                            <div class="workshop-card" data-category="today">
+                                <div class="workshop-header">
+                                    <h3>Morning Meditation Workshop</h3>
+                                    <span class="workshop-badge free">FREE</span>
+                                </div>
+                                <div class="workshop-info">
+                                    <p><i class="fas fa-map-marker-alt"></i> Central Park, New York</p>
+                                    <p><i class="fas fa-calendar"></i> Today, 7:00 AM - 8:00 AM</p>
+                                    <p><i class="fas fa-user"></i> Led by Emma Wilson</p>
+                                    <p><i class="fas fa-users"></i> 15/20 participants</p>
+                                </div>
+                                <p class="workshop-description">Start your day with peaceful meditation and gentle yoga flow.</p>
+                                <button class="btn btn-primary">Join Workshop</button>
+                            </div>
+                            <div class="workshop-card" data-category="weekend">
+                                <div class="workshop-header">
+                                    <h3>Advanced Asana Workshop</h3>
+                                    <span class="workshop-badge paid">$25</span>
+                                </div>
+                                <div class="workshop-info">
+                                    <p><i class="fas fa-map-marker-alt"></i> Yoga Studio Downtown</p>
+                                    <p><i class="fas fa-calendar"></i> Saturday, 2:00 PM - 4:00 PM</p>
+                                    <p><i class="fas fa-user"></i> Led by Mike Chen</p>
+                                    <p><i class="fas fa-users"></i> 8/15 participants</p>
+                                </div>
+                                <p class="workshop-description">Learn advanced poses and improve your practice with expert guidance.</p>
+                                <button class="btn btn-primary">Join Workshop</button>
+                            </div>
+                            <div class="workshop-card" data-category="free">
+                                <div class="workshop-header">
+                                    <h3>Yoga for Beginners</h3>
+                                    <span class="workshop-badge free">FREE</span>
+                                </div>
+                                <div class="workshop-info">
+                                    <p><i class="fas fa-map-marker-alt"></i> Community Center</p>
+                                    <p><i class="fas fa-calendar"></i> Sunday, 10:00 AM - 11:30 AM</p>
+                                    <p><i class="fas fa-user"></i> Led by Sarah Johnson</p>
+                                    <p><i class="fas fa-users"></i> 12/25 participants</p>
+                                </div>
+                                <p class="workshop-description">Perfect introduction to yoga for complete beginners.</p>
+                                <button class="btn btn-primary">Join Workshop</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connect with Trainers Section -->
+                <div id="trainers-section" class="dashboard-section">
+                    <h2>Connect with Trainers</h2>
+                    <div class="trainers-content">
+                        <div class="trainer-search">
+                            <input type="text" id="trainer-search" placeholder="Search trainers by name, specialization, or location...">
+                            <button class="btn btn-primary" onclick="searchTrainers()">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        <div class="trainers-grid">
+                            <div class="trainer-card">
+                                <div class="trainer-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="trainer-info">
+                                    <h3>Emma Wilson</h3>
+                                    <div class="trainer-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9 (156 reviews)</span>
+                                    </div>
+                                    <p class="trainer-specialization">Hatha Yoga, Meditation, Pranayama</p>
+                                    <p class="trainer-experience">5 years experience</p>
+                                    <p class="trainer-location"><i class="fas fa-map-marker-alt"></i> New York, NY</p>
+                                </div>
+                                <div class="trainer-actions">
+                                    <button class="btn btn-primary" onclick="requestCall('emma')">
+                                        <i class="fas fa-phone"></i> Call Request
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="joinCourse('emma')">
+                                        <i class="fas fa-book"></i> Join Course
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="trainer-card">
+                                <div class="trainer-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="trainer-info">
+                                    <h3>Mike Chen</h3>
+                                    <div class="trainer-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.8 (89 reviews)</span>
+                                    </div>
+                                    <p class="trainer-specialization">Vinyasa Flow, Power Yoga, Flexibility</p>
+                                    <p class="trainer-experience">3 years experience</p>
+                                    <p class="trainer-location"><i class="fas fa-map-marker-alt"></i> Los Angeles, CA</p>
+                                </div>
+                                <div class="trainer-actions">
+                                    <button class="btn btn-primary" onclick="requestCall('mike')">
+                                        <i class="fas fa-phone"></i> Call Request
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="joinCourse('mike')">
+                                        <i class="fas fa-book"></i> Join Course
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="trainer-card">
+                                <div class="trainer-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="trainer-info">
+                                    <h3>Sarah Johnson</h3>
+                                    <div class="trainer-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.7 (203 reviews)</span>
+                                    </div>
+                                    <p class="trainer-specialization">Yin Yoga, Restorative, Stress Relief</p>
+                                    <p class="trainer-experience">7 years experience</p>
+                                    <p class="trainer-location"><i class="fas fa-map-marker-alt"></i> Chicago, IL</p>
+                                </div>
+                                <div class="trainer-actions">
+                                    <button class="btn btn-primary" onclick="requestCall('sarah')">
+                                        <i class="fas fa-phone"></i> Call Request
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="joinCourse('sarah')">
+                                        <i class="fas fa-book"></i> Join Course
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Diet Plan Section -->
+                <div id="diet-plan-section" class="dashboard-section">
+                    <h2>AI Diet Plan Customization</h2>
+                    <div class="diet-plan-content">
+                        <div class="diet-form">
+                            <h3>Create Your Custom Diet Plan</h3>
+                            <form onsubmit="generateDietPlan(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="diet-goal">Diet Goal</label>
+                                        <select id="diet-goal" required>
+                                            <option value="">Select Goal</option>
+                                            <option value="weight-loss">Weight Loss</option>
+                                            <option value="muscle-gain">Muscle Gain</option>
+                                            <option value="maintenance">Weight Maintenance</option>
+                                            <option value="energy">Energy Boost</option>
+                                            <option value="detox">Detox</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="diet-type">Diet Type</label>
+                                        <select id="diet-type" required>
+                                            <option value="">Select Type</option>
+                                            <option value="vegetarian">Vegetarian</option>
+                                            <option value="vegan">Vegan</option>
+                                            <option value="keto">Keto</option>
+                                            <option value="paleo">Paleo</option>
+                                            <option value="mediterranean">Mediterranean</option>
+                                            <option value="balanced">Balanced</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="allergies">Allergies/Dietary Restrictions</label>
+                                        <input type="text" id="allergies" placeholder="e.g., nuts, dairy, gluten">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="activity-level">Activity Level</label>
+                                        <select id="activity-level" required>
+                                            <option value="">Select Level</option>
+                                            <option value="sedentary">Sedentary</option>
+                                            <option value="light">Light Activity</option>
+                                            <option value="moderate">Moderate Activity</option>
+                                            <option value="active">Very Active</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-brain"></i> Generate AI Diet Plan
+                                </button>
+                            </form>
+                        </div>
+                        <div id="diet-plan-result" class="diet-plan-result"></div>
+                        <div class="recipe-section">
+                            <h3>Traditional Food Recipes</h3>
+                            <div class="recipes-grid">
+                                <div class="recipe-card">
+                                    <h4>Ayurvedic Kitchari</h4>
+                                    <p>A healing one-pot meal perfect for detox and digestion</p>
+                                    <button class="btn btn-secondary" onclick="showRecipe('kitchari')">View Recipe</button>
+                                </div>
+                                <div class="recipe-card">
+                                    <h4>Golden Milk (Turmeric Latte)</h4>
+                                    <p>Anti-inflammatory drink for better sleep and immunity</p>
+                                    <button class="btn btn-secondary" onclick="showRecipe('golden-milk')">View Recipe</button>
+                                </div>
+                                <div class="recipe-card">
+                                    <h4>Mediterranean Buddha Bowl</h4>
+                                    <p>Nutrient-dense bowl with fresh vegetables and healthy fats</p>
+                                    <button class="btn btn-secondary" onclick="showRecipe('buddha-bowl')">View Recipe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Yoga Section -->
+                <div id="kids-yoga-section" class="dashboard-section">
+                    <h2>Customized Yoga for Kids</h2>
+                    <div class="kids-yoga-content">
+                        <div class="age-groups">
+                            <h3>Select Age Group</h3>
+                            <div class="age-buttons">
+                                <button class="age-btn active" onclick="selectAgeGroup('3-5')">Ages 3-5</button>
+                                <button class="age-btn" onclick="selectAgeGroup('6-8')">Ages 6-8</button>
+                                <button class="age-btn" onclick="selectAgeGroup('9-12')">Ages 9-12</button>
+                                <button class="age-btn" onclick="selectAgeGroup('13-17')">Ages 13-17</button>
+                            </div>
+                        </div>
+                        <div id="kids-yoga-programs" class="yoga-programs">
+                            <div class="program-card" data-age="3-5">
+                                <div class="program-header">
+                                    <h3>Animal Yoga Adventure</h3>
+                                    <span class="age-badge">Ages 3-5</span>
+                                </div>
+                                <p>Fun animal-themed poses that help kids develop strength, flexibility, and imagination.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag">15 minutes</span>
+                                    <span class="feature-tag">Interactive</span>
+                                    <span class="feature-tag">Cartoon Characters</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="startKidsYogaProgram('Animal Yoga Adventure', '3-5')">Start Program</button>
+                            </div>
+                            <div class="program-card" data-age="3-5">
+                                <div class="program-header">
+                                    <h3>Disney Yoga Fun</h3>
+                                    <span class="age-badge">Ages 3-5</span>
+                                </div>
+                                <p>Yoga poses inspired by Disney characters for magical movement.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag">12 minutes</span>
+                                    <span class="feature-tag">Disney Characters</span>
+                                    <span class="feature-tag">Magical Stories</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="startKidsYogaProgram('Disney Yoga Fun', '3-5')">Start Program</button>
+                            </div>
+                            <div class="program-card" data-age="6-8">
+                                <div class="program-header">
+                                    <h3>Superhero Yoga</h3>
+                                    <span class="age-badge">Ages 6-8</span>
+                                </div>
+                                <p>Empowering poses that make kids feel like superheroes while building confidence.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag">20 minutes</span>
+                                    <span class="feature-tag">Confidence Building</span>
+                                    <span class="feature-tag">Superhero Theme</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="startKidsYogaProgram('Superhero Yoga', '6-8')">Start Program</button>
+                            </div>
+                            <div class="program-card" data-age="6-8">
+                                <div class="program-header">
+                                    <h3>Paw Patrol Yoga</h3>
+                                    <span class="age-badge">Ages 6-8</span>
+                                </div>
+                                <p>Adventure-themed yoga with Paw Patrol characters.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag">18 minutes</span>
+                                    <span class="feature-tag">Adventure Theme</span>
+                                    <span class="feature-tag">Team Building</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="startKidsYogaProgram('Paw Patrol Yoga', '6-8')">Start Program</button>
+                            </div>
+                            <div class="program-card" data-age="9-12">
+                                <div class="program-header">
+                                    <h3>Harry Potter Yoga</h3>
+                                    <span class="age-badge">Ages 9-12</span>
+                                </div>
+                                <p>Magical yoga journey through Hogwarts with spells and poses.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag">25 minutes</span>
+                                    <span class="feature-tag">Fantasy Theme</span>
+                                    <span class="feature-tag">Magic Spells</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="startKidsYogaProgram('Harry Potter Yoga', '9-12')">Start Program</button>
+                            </div>
+                            <div class="program-card" data-age="13-17">
+                                <div class="program-header">
+                                    <h3>Teen Mindfulness</h3>
+                                    <span class="age-badge">Ages 13-17</span>
+                                </div>
+                                <p>Stress-relief focused practice with breathing techniques and meditation.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag">30 minutes</span>
+                                    <span class="feature-tag">Stress Relief</span>
+                                    <span class="feature-tag">Mindfulness</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="startKidsYogaProgram('Teen Mindfulness', '13-17')">Start Program</button>
+                            </div>
+                        </div>
+                        <div class="kids-benefits">
+                            <h3>Benefits of Yoga for Kids</h3>
+                            <div class="benefits-grid">
+                                <div class="benefit-item">
+                                    <i class="fas fa-heart"></i>
+                                    <h4>Physical Health</h4>
+                                    <p>Improves flexibility, strength, and coordination</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-brain"></i>
+                                    <h4>Mental Focus</h4>
+                                    <p>Enhances concentration and attention span</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-smile"></i>
+                                    <h4>Emotional Well-being</h4>
+                                    <p>Reduces stress and promotes positive emotions</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-users"></i>
+                                    <h4>Social Skills</h4>
+                                    <p>Builds confidence and social interaction</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trainer Dashboard -->
+    <div id="trainer-dashboard" class="page">
+        <nav class="dashboard-nav">
+            <div class="nav-brand">
+                <h2><i class="fas fa-lotus"></i> Sthira AI - Trainer</h2>
+            </div>
+            <div class="nav-user">
+                <span id="trainer-name">Welcome, Trainer!</span>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="dashboard-sidebar">
+                <ul class="sidebar-menu">
+                    <li class="active" onclick="showTrainerSection('overview')">
+                        <i class="fas fa-home"></i> Overview
+                    </li>
+                    <li onclick="showTrainerSection('profile')">
+                        <i class="fas fa-user"></i> Profile
+                    </li>
+                    <li onclick="showTrainerSection('requests')">
+                        <i class="fas fa-bell"></i> Requests
+                    </li>
+                    <li onclick="showTrainerSection('courses')">
+                        <i class="fas fa-book"></i> Course Management
+                    </li>
+                    <li onclick="showTrainerSection('workshops')">
+                        <i class="fas fa-calendar"></i> Workshops
+                    </li>
+                    <li onclick="showTrainerSection('community')">
+                        <i class="fas fa-users"></i> Community
+                    </li>
+                    <li onclick="showTrainerSection('analytics')">
+                        <i class="fas fa-chart-bar"></i> Analytics
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dashboard-main">
+                <!-- Trainer Overview -->
+                <div id="trainer-overview-section" class="dashboard-section active">
+                    <h2>Trainer Dashboard</h2>
+                    <div class="trainer-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-star"></i>
+                            <h3>4.8</h3>
+                            <p>Average Rating</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <h3>156</h3>
+                            <p>Total Students</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-calendar"></i>
+                            <h3>12</h3>
+                            <p>Active Courses</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>89%</h3>
+                            <p>Monthly Performance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer Profile -->
+                <div id="trainer-profile-section" class="dashboard-section">
+                    <h2>Profile Management</h2>
+                    <div class="profile-content">
+                        <div class="profile-form">
+                            <h3>Update Your Profile</h3>
+                            <form onsubmit="updateTrainerProfile(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="trainer-name-input">Full Name</label>
+                                        <input type="text" id="trainer-name-input" value="Emma Wilson" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="trainer-experience-input">Years of Experience</label>
+                                        <input type="number" id="trainer-experience-input" value="5" min="0" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="trainer-specialization-input">Specialization</label>
+                                    <input type="text" id="trainer-specialization-input" value="Hatha Yoga, Meditation, Pranayama" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="trainer-location-input">Location</label>
+                                    <input type="text" id="trainer-location-input" value="New York, NY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="trainer-bio">Bio</label>
+                                    <textarea id="trainer-bio" rows="4" placeholder="Tell us about your yoga journey and teaching philosophy...">Certified yoga instructor with 5 years of experience. I specialize in Hatha Yoga, meditation, and pranayama techniques. My teaching philosophy focuses on creating a safe, inclusive space for students to explore their practice.</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </form>
+                        </div>
+                        <div class="profile-stats">
+                            <h3>Profile Statistics</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <i class="fas fa-star"></i>
+                                    <h3>4.9</h3>
+                                    <p>Average Rating</p>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fas fa-users"></i>
+                                    <h3>156</h3>
+                                    <p>Total Students</p>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fas fa-calendar"></i>
+                                    <h3>12</h3>
+                                    <p>Active Courses</p>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fas fa-clock"></i>
+                                    <h3>2,450</h3>
+                                    <p>Hours Taught</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Requests -->
+                <div id="trainer-requests-section" class="dashboard-section">
+                    <h2>Training Requests</h2>
+                    <div class="requests-content">
+                        <div class="request-filters">
+                            <button class="filter-btn active" onclick="filterRequests('all')">All Requests</button>
+                            <button class="filter-btn" onclick="filterRequests('pending')">Pending</button>
+                            <button class="filter-btn" onclick="filterRequests('accepted')">Accepted</button>
+                            <button class="filter-btn" onclick="filterRequests('completed')">Completed</button>
+                        </div>
+                        <div class="requests-list">
+                            <div class="request-card" data-status="pending">
+                                <div class="request-header">
+                                    <h3>Sarah Johnson</h3>
+                                    <span class="request-badge pending">Pending</span>
+                                </div>
+                                <div class="request-info">
+                                    <p><i class="fas fa-calendar"></i> Requested: 2 days ago</p>
+                                    <p><i class="fas fa-clock"></i> Preferred time: Morning sessions</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Location: Online</p>
+                                    <p><i class="fas fa-info-circle"></i> Goal: Stress relief and flexibility</p>
+                                </div>
+                                <div class="request-actions">
+                                    <button class="btn btn-primary" onclick="acceptRequest('sarah')">Accept</button>
+                                    <button class="btn btn-secondary" onclick="declineRequest('sarah')">Decline</button>
+                                </div>
+                            </div>
+                            <div class="request-card" data-status="accepted">
+                                <div class="request-header">
+                                    <h3>Mike Chen</h3>
+                                    <span class="request-badge accepted">Accepted</span>
+                                </div>
+                                <div class="request-info">
+                                    <p><i class="fas fa-calendar"></i> Accepted: 1 week ago</p>
+                                    <p><i class="fas fa-clock"></i> Session time: Tuesday 7 PM</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Location: Studio</p>
+                                    <p><i class="fas fa-info-circle"></i> Goal: Advanced poses and strength</p>
+                                </div>
+                                <div class="request-actions">
+                                    <button class="btn btn-primary" onclick="startSession('mike')">Start Session</button>
+                                    <button class="btn btn-secondary" onclick="messageStudent('mike')">Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Management -->
+                <div id="trainer-courses-section" class="dashboard-section">
+                    <h2>Course Management</h2>
+                    <div class="courses-content">
+                        <div class="course-actions">
+                            <button class="btn btn-primary" onclick="createNewCourse()">
+                                <i class="fas fa-plus"></i> Create New Course
+                            </button>
+                        </div>
+                        <div class="courses-grid">
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <h3>Beginner Hatha Yoga</h3>
+                                    <span class="course-status active">Active</span>
+                                </div>
+                                <div class="course-info">
+                                    <p><i class="fas fa-users"></i> 25 students enrolled</p>
+                                    <p><i class="fas fa-calendar"></i> 1 Month Plan</p>
+                                    <p><i class="fas fa-dollar-sign"></i> $99/month</p>
+                                    <p><i class="fas fa-star"></i> 4.8 rating</p>
+                                </div>
+                                <div class="course-description">
+                                    <p>Perfect introduction to Hatha Yoga for beginners. Focus on basic poses, breathing techniques, and relaxation.</p>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary" onclick="editCourse('beginner-hatha')">Edit</button>
+                                    <button class="btn btn-secondary" onclick="viewStudents('beginner-hatha')">Students</button>
+                                </div>
+                            </div>
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <h3>Advanced Meditation</h3>
+                                    <span class="course-status active">Active</span>
+                                </div>
+                                <div class="course-info">
+                                    <p><i class="fas fa-users"></i> 15 students enrolled</p>
+                                    <p><i class="fas fa-calendar"></i> 2 Month Plan</p>
+                                    <p><i class="fas fa-dollar-sign"></i> $149/month</p>
+                                    <p><i class="fas fa-star"></i> 4.9 rating</p>
+                                </div>
+                                <div class="course-description">
+                                    <p>Deep dive into meditation techniques, mindfulness practices, and spiritual growth.</p>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary" onclick="editCourse('advanced-meditation')">Edit</button>
+                                    <button class="btn btn-secondary" onclick="viewStudents('advanced-meditation')">Students</button>
+                                </div>
+                            </div>
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <h3>Stress Relief Yoga</h3>
+                                    <span class="course-status draft">Draft</span>
+                                </div>
+                                <div class="course-info">
+                                    <p><i class="fas fa-users"></i> 0 students enrolled</p>
+                                    <p><i class="fas fa-calendar"></i> 1 Month Plan</p>
+                                    <p><i class="fas fa-dollar-sign"></i> $79/month</p>
+                                    <p><i class="fas fa-star"></i> Not rated yet</p>
+                                </div>
+                                <div class="course-description">
+                                    <p>Gentle yoga practices specifically designed to reduce stress and promote relaxation.</p>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary" onclick="editCourse('stress-relief')">Edit</button>
+                                    <button class="btn btn-secondary" onclick="publishCourse('stress-relief')">Publish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workshop Management -->
+                <div id="trainer-workshops-section" class="dashboard-section">
+                    <h2>Workshop Management</h2>
+                    <div class="workshops-content">
+                        <div class="workshop-actions">
+                            <button class="btn btn-primary" onclick="createNewWorkshop()">
+                                <i class="fas fa-plus"></i> Create New Workshop
+                            </button>
+                        </div>
+                        <div class="workshops-list">
+                            <div class="workshop-card">
+                                <div class="workshop-header">
+                                    <h3>Morning Meditation Workshop</h3>
+                                    <span class="workshop-status upcoming">Upcoming</span>
+                                </div>
+                                <div class="workshop-info">
+                                    <p><i class="fas fa-calendar"></i> Today, 7:00 AM - 8:00 AM</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Central Park, New York</p>
+                                    <p><i class="fas fa-users"></i> 15/20 participants</p>
+                                    <p><i class="fas fa-dollar-sign"></i> Free</p>
+                                </div>
+                                <div class="workshop-actions">
+                                    <button class="btn btn-primary" onclick="manageWorkshop('morning-meditation')">Manage</button>
+                                    <button class="btn btn-secondary" onclick="viewParticipants('morning-meditation')">Participants</button>
+                                </div>
+                            </div>
+                            <div class="workshop-card">
+                                <div class="workshop-header">
+                                    <h3>Advanced Asana Workshop</h3>
+                                    <span class="workshop-status upcoming">Upcoming</span>
+                                </div>
+                                <div class="workshop-info">
+                                    <p><i class="fas fa-calendar"></i> Saturday, 2:00 PM - 4:00 PM</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Yoga Studio Downtown</p>
+                                    <p><i class="fas fa-users"></i> 8/15 participants</p>
+                                    <p><i class="fas fa-dollar-sign"></i> $25</p>
+                                </div>
+                                <div class="workshop-actions">
+                                    <button class="btn btn-primary" onclick="manageWorkshop('advanced-asana')">Manage</button>
+                                    <button class="btn btn-secondary" onclick="viewParticipants('advanced-asana')">Participants</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Management -->
+                <div id="trainer-community-section" class="dashboard-section">
+                    <h2>Community Management</h2>
+                    <div class="community-content">
+                        <div class="community-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h3>1,250</h3>
+                                <p>Community Members</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-comments"></i>
+                                <h3>45</h3>
+                                <p>Active Discussions</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-calendar"></i>
+                                <h3>8</h3>
+                                <p>Upcoming Events</p>
+                            </div>
+                        </div>
+                        <div class="community-features">
+                            <div class="feature-section">
+                                <h3>WhatsApp Community Links</h3>
+                                <div class="community-links">
+                                    <div class="link-card">
+                                        <h4>General Discussion</h4>
+                                        <p>Main community group for general yoga discussions</p>
+                                        <button class="btn btn-primary" onclick="joinWhatsAppGroup('general')">Join Group</button>
+                                    </div>
+                                    <div class="link-card">
+                                        <h4>Beginner Support</h4>
+                                        <p>Support group for yoga beginners</p>
+                                        <button class="btn btn-primary" onclick="joinWhatsAppGroup('beginners')">Join Group</button>
+                                    </div>
+                                    <div class="link-card">
+                                        <h4>Advanced Practitioners</h4>
+                                        <p>Group for experienced yoga practitioners</p>
+                                        <button class="btn btn-primary" onclick="joinWhatsAppGroup('advanced')">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature-section">
+                                <h3>Upcoming Community Events</h3>
+                                <div class="events-list">
+                                    <div class="event-card">
+                                        <h4>Monthly Yoga Challenge</h4>
+                                        <p><i class="fas fa-calendar"></i> Starts: March 1st</p>
+                                        <p><i class="fas fa-users"></i> 150 participants</p>
+                                        <button class="btn btn-secondary" onclick="manageEvent('yoga-challenge')">Manage</button>
+                                    </div>
+                                    <div class="event-card">
+                                        <h4>Meditation Circle</h4>
+                                        <p><i class="fas fa-calendar"></i> Every Sunday, 6 PM</p>
+                                        <p><i class="fas fa-users"></i> 25 participants</p>
+                                        <button class="btn btn-secondary" onclick="manageEvent('meditation-circle')">Manage</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics & Performance -->
+                <div id="trainer-analytics-section" class="dashboard-section">
+                    <h2>Analytics & Performance</h2>
+                    <div class="analytics-content">
+                        <div class="analytics-overview">
+                            <div class="stat-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>89%</h3>
+                                <p>Monthly Performance</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-star"></i>
+                                <h3>4.8</h3>
+                                <p>Average Rating</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h3>156</h3>
+                                <p>Total Students</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h3>$2,450</h3>
+                                <p>Monthly Earnings</p>
+                            </div>
+                        </div>
+                        <div class="performance-metrics">
+                            <div class="metric-section">
+                                <h3>Student Feedback</h3>
+                                <div class="feedback-summary">
+                                    <div class="rating-breakdown">
+                                        <div class="rating-item">
+                                            <span>5 stars</span>
+                                            <div class="rating-bar">
+                                                <div class="rating-fill" style="width: 85%"></div>
+                                            </div>
+                                            <span>85%</span>
+                                        </div>
+                                        <div class="rating-item">
+                                            <span>4 stars</span>
+                                            <div class="rating-bar">
+                                                <div class="rating-fill" style="width: 12%"></div>
+                                            </div>
+                                            <span>12%</span>
+                                        </div>
+                                        <div class="rating-item">
+                                            <span>3 stars</span>
+                                            <div class="rating-bar">
+                                                <div class="rating-fill" style="width: 2%"></div>
+                                            </div>
+                                            <span>2%</span>
+                                        </div>
+                                        <div class="rating-item">
+                                            <span>2 stars</span>
+                                            <div class="rating-bar">
+                                                <div class="rating-fill" style="width: 1%"></div>
+                                            </div>
+                                            <span>1%</span>
+                                        </div>
+                                        <div class="rating-item">
+                                            <span>1 star</span>
+                                            <div class="rating-bar">
+                                                <div class="rating-fill" style="width: 0%"></div>
+                                            </div>
+                                            <span>0%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="metric-section">
+                                <h3>Recent Reviews</h3>
+                                <div class="reviews-list">
+                                    <div class="review-card">
+                                        <div class="review-header">
+                                            <span class="reviewer-name">Sarah Johnson</span>
+                                            <div class="review-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <p class="review-text">"Emma is an amazing instructor! Her classes are well-structured and she provides excellent guidance for beginners."</p>
+                                        <span class="review-date">2 days ago</span>
+                                    </div>
+                                    <div class="review-card">
+                                        <div class="review-header">
+                                            <span class="reviewer-name">Mike Chen</span>
+                                            <div class="review-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <p class="review-text">"The meditation workshop was transformative. Emma's teaching style is calming and effective."</p>
+                                        <span class="review-date">1 week ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
